@@ -1,3 +1,4 @@
+//node, express 로 구성한 restful webservice
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -28,12 +29,14 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(cors());
 
+//Todo 전체 조회
 app.get('/api/todos', (req, res) => {
   setTimeout(() => {
     res.send(todos);
   }, 1000);
 });
 
+//Todo 1개 조회
 app.get('/api/todos/:id', (req, res) => {
   const todo = todos.find(t => t.id == req.params.id);
 
@@ -44,6 +47,7 @@ app.get('/api/todos/:id', (req, res) => {
   }
 });
 
+//Todo 등록
 app.post('/api/todos', (req, res) => {
   const todo = { id: getNextId(), ...req.body };
   todos = [...todos, todo];
@@ -56,6 +60,7 @@ app.delete('/api/todos', (req, res) => {
   todos.splice(0, todos.length);
   res.send(todos);
 });
+
 //Todo 1개 삭제
 app.delete('/api/todos/:id', function (request, response) {
   // 변수를 선언합니다.
@@ -79,6 +84,7 @@ app.delete('/api/todos/:id', function (request, response) {
     });
   }
 });
+
 //Todo 수정
 app.put('/api/todos/:id', (req, res) => {
   var id = Number(req.params.id);

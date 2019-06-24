@@ -5,11 +5,11 @@ import { mapGetters } from 'vuex';
     <transition-group name="list" tag="ul">
       <li v-for="todoItem in this.getTodoItems" v-bind:key="todoItem.id" class="shadow">
           <i class="fas fa-check checkBtn" :class={checkBtnCompleted:todoItem.completed} 
-          v-on:click="toggleTodo({todoItem})" ></i>
+          v-on:click="toggleTodo(todoItem)" ></i>
           <span :class="{textCompleted:todoItem.completed}">
               {{todoItem.item}}
           </span>
-          <span class="removeBtn" v-on:click="removeTodoItems({todoItem})">
+          <span class="removeBtn" v-on:click="removeTodoItems(todoItem)">
               <i class="fas fa-trash-alt"></i>
           </span>
       </li>
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
       ...mapActions(['removeTodoItems']),
-      toggleTodo({todoItem}) {
+      toggleTodo(todoItem) {
         todoItem.completed = !todoItem.completed;
         this.$store.dispatch('toggleTodoItems',todoItem);
       }

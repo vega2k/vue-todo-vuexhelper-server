@@ -20,7 +20,7 @@ const actions = {
        }); 
     },
     removeTodoItems(context, payload) {
-        axios.delete(`${baseUrl}/${payload.todoItem.id}`)
+        axios.delete(`${baseUrl}/${payload.id}`)
         .then(r => r.data)
         .then(items => {
             context.commit('setTodoItems',items);
